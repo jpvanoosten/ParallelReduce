@@ -1,13 +1,6 @@
-using System;
-using System.Collections.Generic;
 using NUnit.Framework;
 using Unity.Collections;
-using Unity.Jobs;
-using Unity.Mathematics;
 using Unity.PerformanceTesting;
-using UnityEditor;
-using UnityEngine;
-using static Unity.Mathematics.math;
 
 public class ParallelReduceTest
 {

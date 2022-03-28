@@ -13,7 +13,7 @@ public interface IBinaryOperator<T> where T : struct
 }
 
 [BurstCompile(CompileSynchronously = true)]
-public struct ParalellReduceJob<T, U> : IJobParallelForBatch
+public struct ParallelReduceJob<T, U> : IJobParallelForBatch
     where T : struct
     where U : struct, IBinaryOperator<T>
 {
@@ -64,9 +64,7 @@ public static class ParallelReduce
     private static void Swap<T>(ref NativeArray<T> a, ref NativeArray<T> b)
         where T : struct
     {
-        var t = a;
-        a = b;
-        b = t;
+        (a, b) = (b, a);
     }
 
     /// <summary>
@@ -100,7 +98,7 @@ public static class ParallelReduce
         {
             Swap(ref src, ref dst);
 
-            job = new ParalellReduceJob<T, U>
+            job = new ParallelReduceJob<T, U>
             {
                 Src = src,
                 Dst = dst,
